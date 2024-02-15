@@ -184,13 +184,29 @@ input[type="submit"][disabled] {
     width: auto;
 }
 
-.form-field .nesty-input {
+.form-field .nesty-input,
+[dir] .select2-container--default .select2-selection--single {
     border-radius: 4px;
     border: 1px solid #87929D;
     height: 40px;
     line-height: 40px;
     outline: none;
     vertical-align: middle;
+}
+[dir] .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    display: none;
+}
+[dir] .select2-container--default .select2-selection--single .select2-selection__arrow::after {
+    color: #999;
+    content: "▾";
+    line-height: 1em;
+    position: absolute;
+    right: 10px;
+    top: 25%;
+}
+
+[dir] .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: inherit;
 }
 
 .form-field .nesty-input:focus {
@@ -916,11 +932,11 @@ button.thumb-down { background-image: url($assets-thumb-down-svg); }
 
 @media screen and (min-width: 1284px) {
     .rtbf-shortcut-list--home > .container { display: flex; }
-    .rtbf-shortcut-list--home h2 { 
+    .rtbf-shortcut-list--home h2 {
         margin-top: .625rem;
-        flex-basis: 30%; 
+        flex-basis: 30%;
     }
-    .rtbf-shortcut-list--home ul { 
+    .rtbf-shortcut-list--home ul {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 0 1rem;

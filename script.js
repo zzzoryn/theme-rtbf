@@ -11,22 +11,24 @@ function debounce(callback, wait) {
 }
 
 // Define variables for search field
-let searchFormFilledClassName = "search-has-value";
-let searchFormSelector = "form[role='search']";
+let searchFormFilledClassName = 'search-has-value';
+let searchFormSelector = 'form[role=\'search\']';
 
 // Clear the search input, and then return focus to it
 function clearSearchInput(event) {
   event.target.closest(searchFormSelector).classList.remove(searchFormFilledClassName);
 
   let input;
-  if (event.target.tagName === "INPUT") {
+  if (event.target.tagName === 'INPUT') {
     input = event.target;
-  } else if (event.target.tagName === "BUTTON") {
-    input = event.target.previousElementSibling;
-  } else {
-    input = event.target.closest("button").previousElementSibling;
   }
-  input.value = "";
+  else if (event.target.tagName === 'BUTTON') {
+    input = event.target.previousElementSibling;
+  }
+  else {
+    input = event.target.closest('button').previousElementSibling;
+  }
+  input.value = '';
   input.focus();
 }
 
@@ -34,7 +36,7 @@ function clearSearchInput(event) {
 // when someone presses the escape key, per:
 // https://twitter.com/adambsilver/status/1152452833234554880
 function clearSearchInputOnKeypress(event) {
-  const searchInputDeleteKeys = ["Delete", "Escape"];
+  const searchInputDeleteKeys = ['Delete', 'Escape'];
   if (searchInputDeleteKeys.includes(event.key)) {
     clearSearchInput(event);
   }
@@ -46,15 +48,15 @@ function clearSearchInputOnKeypress(event) {
 // https://adrianroselli.com/2019/07/ignore-typesearch.html#Delete
 // https://www.scottohara.me/blog/2022/02/19/custom-clear-buttons.html
 function buildClearSearchButton(inputId) {
-  const button = document.createElement("button");
-  button.setAttribute("type", "button");
-  button.setAttribute("aria-controls", inputId);
-  button.classList.add("clear-button");
+  const button = document.createElement('button');
+  button.setAttribute('type', 'button');
+  button.setAttribute('aria-controls', inputId);
+  button.classList.add('clear-button');
   const buttonLabel = window.searchClearButtonLabelLocalized;
-  const icon = `<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' focusable='false' role='img' viewBox='0 0 12 12' aria-label='${buttonLabel}'><path stroke='currentColor' stroke-linecap='round' stroke-width='2' d='M3 9l6-6m0 6L3 3'/></svg>`;
+  const icon = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" role="img" viewBox="0 0 12 12" aria-label="${buttonLabel}"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M3 9l6-6m0 6L3 3"/></svg>`;
   button.innerHTML = icon;
-  button.addEventListener("click", clearSearchInput);
-  button.addEventListener("keyup", clearSearchInputOnKeypress);
+  button.addEventListener('click', clearSearchInput);
+  button.addEventListener('keyup', clearSearchInputOnKeypress);
   return button;
 }
 
@@ -73,7 +75,7 @@ function appendClearSearchButton(input, form) {
 const toggleClearSearchButtonAvailability = debounce(function(event) {
   const form = event.target.closest(searchFormSelector);
   form.classList.toggle(searchFormFilledClassName, event.target.value.length > 0);
-}, 200)
+}, 200);
 
 document.addEventListener('DOMContentLoaded', function() {
   // Key map
@@ -84,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var DOWN = 40;
   var TAB = 9;
 
-  function closest (element, selector) {
+  function closest(element, selector) {
     if (Element.prototype.closest) {
       return element.closest(selector);
     }
@@ -95,17 +97,18 @@ document.addEventListener('DOMContentLoaded', function() {
         return element;
       }
       element = element.parentElement || element.parentNode;
-    } while (element !== null && element.nodeType === 1);
+    }
+    while (element !== null && element.nodeType === 1);
     return null;
   }
 
   // Set up clear functionality for the search field
   const searchForms = [...document.querySelectorAll(searchFormSelector)];
-  const searchInputs = searchForms.map(form => form.querySelector("input[type='search']"));
+  const searchInputs = searchForms.map(form => form.querySelector('input[type=\'search\']'));
   searchInputs.forEach((input) => {
     appendClearSearchButton(input, input.closest(searchFormSelector));
-    input.addEventListener("keyup", clearSearchInputOnKeypress);
-    input.addEventListener("keyup", toggleClearSearchButtonAvailability);
+    input.addEventListener('keyup', clearSearchInputOnKeypress);
+    input.addEventListener('keyup', toggleClearSearchButtonAvailability);
   });
 
   // social share popups
@@ -118,9 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // In some cases we should preserve focus after page reload
   function saveFocus() {
-    var activeElementId = document.activeElement.getAttribute("id");
+    var activeElementId = document.activeElement.getAttribute('id');
     sessionStorage.setItem('returnFocusTo', '#' + activeElementId);
   }
+
   var returnFocusTo = sessionStorage.getItem('returnFocusTo');
   if (returnFocusTo) {
     sessionStorage.removeItem('returnFocusTo');
@@ -129,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // show form controls when the textarea receives focus or backbutton is used and value exists
-  var commentContainerTextarea = document.querySelector('.comment-container textarea'),
-    commentContainerFormControls = document.querySelector('.comment-form-controls, .comment-ccs');
+  var commentContainerTextarea     = document.querySelector('.comment-container textarea'),
+      commentContainerFormControls = document.querySelector('.comment-form-controls, .comment-ccs');
 
   if (commentContainerTextarea) {
     commentContainerTextarea.addEventListener('focus', function focusCommentContainerTextarea() {
@@ -144,9 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Expand Request comment form when Add to conversation is clicked
-  var showRequestCommentContainerTrigger = document.querySelector('.request-container .comment-container .comment-show-container'),
-    requestCommentFields = document.querySelectorAll('.request-container .comment-container .comment-fields'),
-    requestCommentSubmit = document.querySelector('.request-container .comment-container .request-submit-comment');
+  var showRequestCommentContainerTrigger = document.querySelector(
+        '.request-container .comment-container .comment-show-container'),
+      requestCommentFields               = document.querySelectorAll(
+        '.request-container .comment-container .comment-fields'),
+      requestCommentSubmit               = document.querySelector(
+        '.request-container .comment-container .request-submit-comment');
 
   if (showRequestCommentContainerTrigger) {
     showRequestCommentContainerTrigger.addEventListener('click', function() {
@@ -161,9 +168,10 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Mark as solved button
-  var requestMarkAsSolvedButton = document.querySelector('.request-container .mark-as-solved:not([data-disabled])'),
-    requestMarkAsSolvedCheckbox = document.querySelector('.request-container .comment-container input[type=checkbox]'),
-    requestCommentSubmitButton = document.querySelector('.request-container .comment-container input[type=submit]');
+  var requestMarkAsSolvedButton   = document.querySelector('.request-container .mark-as-solved:not([data-disabled])'),
+      requestMarkAsSolvedCheckbox = document.querySelector(
+        '.request-container .comment-container input[type=checkbox]'),
+      requestCommentSubmitButton  = document.querySelector('.request-container .comment-container input[type=submit]');
 
   if (requestMarkAsSolvedButton) {
     requestMarkAsSolvedButton.addEventListener('click', function() {
@@ -178,15 +186,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Change Mark as solved text according to whether comment is filled
   var requestCommentTextarea = document.querySelector('.request-container .comment-container textarea');
 
-  var usesWysiwyg = requestCommentTextarea && requestCommentTextarea.dataset.helper === "wysiwyg";
+  var usesWysiwyg = requestCommentTextarea && requestCommentTextarea.dataset.helper === 'wysiwyg';
 
   function isEmptyPlaintext(s) {
     return s.trim() === '';
   }
 
   function isEmptyHtml(xml) {
-    var doc = new DOMParser().parseFromString(`<_>${xml}</_>`, "text/xml");
-    var img = doc.querySelector("img");
+    var doc = new DOMParser().parseFromString(`<_>${xml}</_>`, 'text/xml');
+    var img = doc.querySelector('img');
     return img === null && isEmptyPlaintext(doc.children[0].textContent);
   }
 
@@ -199,9 +207,11 @@ document.addEventListener('DOMContentLoaded', function() {
           requestMarkAsSolvedButton.innerText = requestMarkAsSolvedButton.getAttribute('data-solve-translation');
         }
         requestCommentSubmitButton.disabled = true;
-      } else {
+      }
+      else {
         if (requestMarkAsSolvedButton) {
-          requestMarkAsSolvedButton.innerText = requestMarkAsSolvedButton.getAttribute('data-solve-and-submit-translation');
+          requestMarkAsSolvedButton.innerText = requestMarkAsSolvedButton.getAttribute(
+            'data-solve-and-submit-translation');
         }
         requestCommentSubmitButton.disabled = false;
       }
@@ -214,13 +224,14 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Submit requests filter form on status or organization change in the request list page
-  Array.prototype.forEach.call(document.querySelectorAll('#request-status-select, #request-organization-select'), function(el) {
-    el.addEventListener('change', function(e) {
-      e.stopPropagation();
-      saveFocus();
-      closest(this, 'form').submit();
+  Array.prototype.forEach.call(document.querySelectorAll('#request-status-select, #request-organization-select'),
+    function(el) {
+      el.addEventListener('change', function(e) {
+        e.stopPropagation();
+        saveFocus();
+        closest(this, 'form').submit();
+      });
     });
-  });
 
   // Submit requests filter form on search in the request list page
   var quickSearch = document.querySelector('#quick-search');
@@ -287,28 +298,28 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // If multibrand search has more than 5 help centers or categories collapse the list
-  var multibrandFilterLists = document.querySelectorAll(".multibrand-filter-list");
+  var multibrandFilterLists = document.querySelectorAll('.multibrand-filter-list');
   Array.prototype.forEach.call(multibrandFilterLists, function(filter) {
     if (filter.children.length > 6) {
       // Display the show more button
-      var trigger = filter.querySelector(".see-all-filters");
-      trigger.setAttribute("aria-hidden", false);
+      var trigger = filter.querySelector('.see-all-filters');
+      trigger.setAttribute('aria-hidden', false);
 
       // Add event handler for click
-      trigger.addEventListener("click", function(e) {
+      trigger.addEventListener('click', function(e) {
         e.stopPropagation();
         trigger.parentNode.removeChild(trigger);
-        filter.classList.remove("multibrand-filter-list--collapsed")
-      })
+        filter.classList.remove('multibrand-filter-list--collapsed');
+      });
     }
   });
 
   // If there are any error notifications below an input field, focus that field
-  var notificationElm = document.querySelector(".notification-error");
+  var notificationElm = document.querySelector('.notification-error');
   if (
     notificationElm &&
     notificationElm.previousElementSibling &&
-    typeof notificationElm.previousElementSibling.focus === "function"
+    typeof notificationElm.previousElementSibling.focus === 'function'
   ) {
     notificationElm.previousElementSibling.focus();
   }
@@ -320,36 +331,36 @@ document.addEventListener('DOMContentLoaded', function() {
     this.menu = menu;
 
     this.menuPlacement = {
-      top: menu.classList.contains("dropdown-menu-top"),
-      end: menu.classList.contains("dropdown-menu-end")
+      top: menu.classList.contains('dropdown-menu-top'),
+      end: menu.classList.contains('dropdown-menu-end')
     };
 
-    this.toggle.addEventListener("click", this.clickHandler.bind(this));
-    this.toggle.addEventListener("keydown", this.toggleKeyHandler.bind(this));
-    this.menu.addEventListener("keydown", this.menuKeyHandler.bind(this));
+    this.toggle.addEventListener('click', this.clickHandler.bind(this));
+    this.toggle.addEventListener('keydown', this.toggleKeyHandler.bind(this));
+    this.menu.addEventListener('keydown', this.menuKeyHandler.bind(this));
   }
 
   Dropdown.prototype = {
 
     get isExpanded() {
-      return this.menu.getAttribute("aria-expanded") === "true";
+      return this.menu.getAttribute('aria-expanded') === 'true';
     },
 
     get menuItems() {
-      return Array.prototype.slice.call(this.menu.querySelectorAll("[role='menuitem']"));
+      return Array.prototype.slice.call(this.menu.querySelectorAll('[role=\'menuitem\']'));
     },
 
     dismiss: function() {
       if (!this.isExpanded) return;
 
-      this.menu.setAttribute("aria-expanded", false);
-      this.menu.classList.remove("dropdown-menu-end", "dropdown-menu-top");
+      this.menu.setAttribute('aria-expanded', false);
+      this.menu.classList.remove('dropdown-menu-end', 'dropdown-menu-top');
     },
 
     open: function() {
       if (this.isExpanded) return;
 
-      this.menu.setAttribute("aria-expanded", true);
+      this.menu.setAttribute('aria-expanded', true);
       this.handleOverflow();
     },
 
@@ -362,15 +373,15 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       if (overflow.right || this.menuPlacement.end) {
-        this.menu.classList.add("dropdown-menu-end");
+        this.menu.classList.add('dropdown-menu-end');
       }
 
       if (overflow.bottom || this.menuPlacement.top) {
-        this.menu.classList.add("dropdown-menu-top");
+        this.menu.classList.add('dropdown-menu-top');
       }
 
       if (this.menu.getBoundingClientRect().top < 0) {
-        this.menu.classList.remove("dropdown-menu-top")
+        this.menu.classList.remove('dropdown-menu-top');
       }
     },
 
@@ -395,7 +406,8 @@ document.addEventListener('DOMContentLoaded', function() {
     clickHandler: function() {
       if (this.isExpanded) {
         this.dismiss();
-      } else {
+      }
+      else {
         this.open();
       }
     },
@@ -443,13 +455,16 @@ document.addEventListener('DOMContentLoaded', function() {
           if (e.shiftKey) {
             if (currentElement === firstItem) {
               this.dismiss();
-            } else {
+            }
+            else {
               e.preventDefault();
               this.focusPreviousMenuItem(currentElement);
             }
-          } else if (currentElement === lastItem) {
+          }
+          else if (currentElement === lastItem) {
             this.dismiss();
-          } else {
+          }
+          else {
             e.preventDefault();
             this.focusNextMenuItem(currentElement);
           }
@@ -461,19 +476,19 @@ document.addEventListener('DOMContentLoaded', function() {
           break;
       }
     }
-  }
+  };
 
   var dropdowns = [];
-  var dropdownToggles = Array.prototype.slice.call(document.querySelectorAll(".dropdown-toggle"));
+  var dropdownToggles = Array.prototype.slice.call(document.querySelectorAll('.dropdown-toggle'));
 
   dropdownToggles.forEach(function(toggle) {
     var menu = toggle.nextElementSibling;
-    if (menu && menu.classList.contains("dropdown-menu")) {
+    if (menu && menu.classList.contains('dropdown-menu')) {
       dropdowns.push(new Dropdown(toggle, menu));
     }
   });
 
-  document.addEventListener("click", function(evt) {
+  document.addEventListener('click', function(evt) {
     dropdowns.forEach(function(dropdown) {
       if (!dropdown.toggle.contains(evt.target)) {
         dropdown.dismiss();
@@ -482,199 +497,199 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-$(function () {
-    {
-        var unknown = '-';
+$(function() {
+  {
+    var unknown = '-';
 
-        // screen
-        var screenSize = '';
-        if (screen.width) {
-            width = (screen.width) ? screen.width : '';
-            height = (screen.height) ? screen.height : '';
-            screenSize += '' + width + " x " + height;
-        }
-
-        // browser
-        var nVer = navigator.appVersion;
-        var nAgt = navigator.userAgent;
-        var browser = navigator.appName;
-        var version = '' + parseFloat(navigator.appVersion);
-        var majorVersion = parseInt(navigator.appVersion, 10);
-        var nameOffset, verOffset, ix;
-
-        // Opera
-        if ((verOffset = nAgt.indexOf('Opera')) != -1) {
-            browser = 'Opera';
-            version = nAgt.substring(verOffset + 6);
-            if ((verOffset = nAgt.indexOf('Version')) != -1) {
-                version = nAgt.substring(verOffset + 8);
-            }
-        }
-        // Opera Next
-        if ((verOffset = nAgt.indexOf('OPR')) != -1) {
-            browser = 'Opera';
-            version = nAgt.substring(verOffset + 4);
-        }
-        // Legacy Edge
-        else if ((verOffset = nAgt.indexOf('Edge')) != -1) {
-            browser = 'Microsoft Legacy Edge';
-            version = nAgt.substring(verOffset + 5);
-        }
-        // Edge (Chromium)
-        else if ((verOffset = nAgt.indexOf('Edg')) != -1) {
-            browser = 'Microsoft Edge';
-            version = nAgt.substring(verOffset + 4);
-        }
-        // MSIE
-        else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
-            browser = 'Microsoft Internet Explorer';
-            version = nAgt.substring(verOffset + 5);
-        }
-        // Chrome
-        else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
-            browser = 'Chrome';
-            version = nAgt.substring(verOffset + 7);
-        }
-        // Safari
-        else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
-            browser = 'Safari';
-            version = nAgt.substring(verOffset + 7);
-            if ((verOffset = nAgt.indexOf('Version')) != -1) {
-                version = nAgt.substring(verOffset + 8);
-            }
-        }
-        // Firefox
-        else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
-            browser = 'Firefox';
-            version = nAgt.substring(verOffset + 8);
-        }
-        // MSIE 11+
-        else if (nAgt.indexOf('Trident/') != -1) {
-            browser = 'Microsoft Internet Explorer';
-            version = nAgt.substring(nAgt.indexOf('rv:') + 3);
-        }
-        // Other browsers
-        else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
-            browser = nAgt.substring(nameOffset, verOffset);
-            version = nAgt.substring(verOffset + 1);
-            if (browser.toLowerCase() == browser.toUpperCase()) {
-                browser = navigator.appName;
-            }
-        }
-        // trim the version string
-        if ((ix = version.indexOf(';')) != -1) version = version.substring(0, ix);
-        if ((ix = version.indexOf(' ')) != -1) version = version.substring(0, ix);
-        if ((ix = version.indexOf(')')) != -1) version = version.substring(0, ix);
-
-        majorVersion = parseInt('' + version, 10);
-        if (isNaN(majorVersion)) {
-            version = '' + parseFloat(navigator.appVersion);
-            majorVersion = parseInt(navigator.appVersion, 10);
-        }
-
-        // mobile version
-        var mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
-
-        // cookie
-        var cookieEnabled = (navigator.cookieEnabled) ? true : false;
-
-        if (typeof navigator.cookieEnabled == 'undefined' && !cookieEnabled) {
-            document.cookie = 'testcookie';
-            cookieEnabled = (document.cookie.indexOf('testcookie') != -1) ? true : false;
-        }
-
-        // system
-        var os = unknown;
-        var clientStrings = [
-            {s:'Windows 10', r:/(Windows 10.0|Windows NT 10.0)/},
-            {s:'Windows 8.1', r:/(Windows 8.1|Windows NT 6.3)/},
-            {s:'Windows 8', r:/(Windows 8|Windows NT 6.2)/},
-            {s:'Windows 7', r:/(Windows 7|Windows NT 6.1)/},
-            {s:'Windows Vista', r:/Windows NT 6.0/},
-            {s:'Windows Server 2003', r:/Windows NT 5.2/},
-            {s:'Windows XP', r:/(Windows NT 5.1|Windows XP)/},
-            {s:'Windows 2000', r:/(Windows NT 5.0|Windows 2000)/},
-            {s:'Windows ME', r:/(Win 9x 4.90|Windows ME)/},
-            {s:'Windows 98', r:/(Windows 98|Win98)/},
-            {s:'Windows 95', r:/(Windows 95|Win95|Windows_95)/},
-            {s:'Windows NT 4.0', r:/(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/},
-            {s:'Windows CE', r:/Windows CE/},
-            {s:'Windows 3.11', r:/Win16/},
-            {s:'Android', r:/Android/},
-            {s:'Open BSD', r:/OpenBSD/},
-            {s:'Sun OS', r:/SunOS/},
-            {s:'Chrome OS', r:/CrOS/},
-            {s:'Linux', r:/(Linux|X11(?!.*CrOS))/},
-            {s:'iOS', r:/(iPhone|iPad|iPod)/},
-            {s:'Mac OS X', r:/Mac OS X/},
-            {s:'Mac OS', r:/(Mac OS|MacPPC|MacIntel|Mac_PowerPC|Macintosh)/},
-            {s:'QNX', r:/QNX/},
-            {s:'UNIX', r:/UNIX/},
-            {s:'BeOS', r:/BeOS/},
-            {s:'OS/2', r:/OS\/2/},
-            {s:'Search Bot', r:/(nuhk|Googlebot|Yammybot|Openbot|Slurp|MSNBot|Ask Jeeves\/Teoma|ia_archiver)/}
-        ];
-        for (var id in clientStrings) {
-            var cs = clientStrings[id];
-            if (cs.r.test(nAgt)) {
-                os = cs.s;
-                break;
-            }
-        }
-
-        var osVersion = unknown;
-
-        if (/Windows/.test(os)) {
-            osVersion = /Windows (.*)/.exec(os)[1];
-            os = 'Windows';
-        }
-
-        switch (os) {
-            case 'Mac OS':
-            case 'Mac OS X':
-            case 'Android':
-                osVersion = /(?:Android|Mac OS|Mac OS X|MacPPC|MacIntel|Mac_PowerPC|Macintosh) ([\.\_\d]+)/.exec(nAgt)[1];
-                break;
-
-            case 'iOS':
-                osVersion = /OS (\d+)_(\d+)_?(\d+)?/.exec(nVer);
-                osVersion = osVersion[1] + '.' + osVersion[2] + '.' + (osVersion[3] | 0);
-                break;
-        }
-
-        // flash (you'll need to include swfobject)
-        /* script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" */
-        var flashVersion = 'no check';
-        if (typeof swfobject != 'undefined') {
-            var fv = swfobject.getFlashPlayerVersion();
-            if (fv.major > 0) {
-                flashVersion = fv.major + '.' + fv.minor + ' r' + fv.release;
-            }
-            else  {
-                flashVersion = unknown;
-            }
-        }
+    // screen
+    var screenSize = '';
+    if (screen.width) {
+      width = (screen.width) ? screen.width : '';
+      height = (screen.height) ? screen.height : '';
+      screenSize += '' + width + ' x ' + height;
     }
 
-    window.jscd = {
-        screen: screenSize,
-        browser: browser,
-        browserVersion: version,
-        browserMajorVersion: majorVersion,
-        mobile: mobile,
-        os: os,
-        osVersion: osVersion,
-        cookies: cookieEnabled,
-        flashVersion: flashVersion
-    };
+    // browser
+    var nVer = navigator.appVersion;
+    var nAgt = navigator.userAgent;
+    var browser = navigator.appName;
+    var version = '' + parseFloat(navigator.appVersion);
+    var majorVersion = parseInt(navigator.appVersion, 10);
+    var nameOffset, verOffset, ix;
+
+    // Opera
+    if ((verOffset = nAgt.indexOf('Opera')) != -1) {
+      browser = 'Opera';
+      version = nAgt.substring(verOffset + 6);
+      if ((verOffset = nAgt.indexOf('Version')) != -1) {
+        version = nAgt.substring(verOffset + 8);
+      }
+    }
+    // Opera Next
+    if ((verOffset = nAgt.indexOf('OPR')) != -1) {
+      browser = 'Opera';
+      version = nAgt.substring(verOffset + 4);
+    }
+    // Legacy Edge
+    else if ((verOffset = nAgt.indexOf('Edge')) != -1) {
+      browser = 'Microsoft Legacy Edge';
+      version = nAgt.substring(verOffset + 5);
+    }
+    // Edge (Chromium)
+    else if ((verOffset = nAgt.indexOf('Edg')) != -1) {
+      browser = 'Microsoft Edge';
+      version = nAgt.substring(verOffset + 4);
+    }
+    // MSIE
+    else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
+      browser = 'Microsoft Internet Explorer';
+      version = nAgt.substring(verOffset + 5);
+    }
+    // Chrome
+    else if ((verOffset = nAgt.indexOf('Chrome')) != -1) {
+      browser = 'Chrome';
+      version = nAgt.substring(verOffset + 7);
+    }
+    // Safari
+    else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
+      browser = 'Safari';
+      version = nAgt.substring(verOffset + 7);
+      if ((verOffset = nAgt.indexOf('Version')) != -1) {
+        version = nAgt.substring(verOffset + 8);
+      }
+    }
+    // Firefox
+    else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
+      browser = 'Firefox';
+      version = nAgt.substring(verOffset + 8);
+    }
+    // MSIE 11+
+    else if (nAgt.indexOf('Trident/') != -1) {
+      browser = 'Microsoft Internet Explorer';
+      version = nAgt.substring(nAgt.indexOf('rv:') + 3);
+    }
+    // Other browsers
+    else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
+      browser = nAgt.substring(nameOffset, verOffset);
+      version = nAgt.substring(verOffset + 1);
+      if (browser.toLowerCase() == browser.toUpperCase()) {
+        browser = navigator.appName;
+      }
+    }
+    // trim the version string
+    if ((ix = version.indexOf(';')) != -1) version = version.substring(0, ix);
+    if ((ix = version.indexOf(' ')) != -1) version = version.substring(0, ix);
+    if ((ix = version.indexOf(')')) != -1) version = version.substring(0, ix);
+
+    majorVersion = parseInt('' + version, 10);
+    if (isNaN(majorVersion)) {
+      version = '' + parseFloat(navigator.appVersion);
+      majorVersion = parseInt(navigator.appVersion, 10);
+    }
+
+    // mobile version
+    var mobile = /Mobile|mini|Fennec|Android|iP(ad|od|hone)/.test(nVer);
+
+    // cookie
+    var cookieEnabled = (navigator.cookieEnabled) ? true : false;
+
+    if (typeof navigator.cookieEnabled == 'undefined' && !cookieEnabled) {
+      document.cookie = 'testcookie';
+      cookieEnabled = (document.cookie.indexOf('testcookie') != -1) ? true : false;
+    }
+
+    // system
+    var os = unknown;
+    var clientStrings = [
+      {s: 'Windows 10', r: /(Windows 10.0|Windows NT 10.0)/},
+      {s: 'Windows 8.1', r: /(Windows 8.1|Windows NT 6.3)/},
+      {s: 'Windows 8', r: /(Windows 8|Windows NT 6.2)/},
+      {s: 'Windows 7', r: /(Windows 7|Windows NT 6.1)/},
+      {s: 'Windows Vista', r: /Windows NT 6.0/},
+      {s: 'Windows Server 2003', r: /Windows NT 5.2/},
+      {s: 'Windows XP', r: /(Windows NT 5.1|Windows XP)/},
+      {s: 'Windows 2000', r: /(Windows NT 5.0|Windows 2000)/},
+      {s: 'Windows ME', r: /(Win 9x 4.90|Windows ME)/},
+      {s: 'Windows 98', r: /(Windows 98|Win98)/},
+      {s: 'Windows 95', r: /(Windows 95|Win95|Windows_95)/},
+      {s: 'Windows NT 4.0', r: /(Windows NT 4.0|WinNT4.0|WinNT|Windows NT)/},
+      {s: 'Windows CE', r: /Windows CE/},
+      {s: 'Windows 3.11', r: /Win16/},
+      {s: 'Android', r: /Android/},
+      {s: 'Open BSD', r: /OpenBSD/},
+      {s: 'Sun OS', r: /SunOS/},
+      {s: 'Chrome OS', r: /CrOS/},
+      {s: 'Linux', r: /(Linux|X11(?!.*CrOS))/},
+      {s: 'iOS', r: /(iPhone|iPad|iPod)/},
+      {s: 'Mac OS X', r: /Mac OS X/},
+      {s: 'Mac OS', r: /(Mac OS|MacPPC|MacIntel|Mac_PowerPC|Macintosh)/},
+      {s: 'QNX', r: /QNX/},
+      {s: 'UNIX', r: /UNIX/},
+      {s: 'BeOS', r: /BeOS/},
+      {s: 'OS/2', r: /OS\/2/},
+      {s: 'Search Bot', r: /(nuhk|Googlebot|Yammybot|Openbot|Slurp|MSNBot|Ask Jeeves\/Teoma|ia_archiver)/}
+    ];
+    for (var id in clientStrings) {
+      var cs = clientStrings[id];
+      if (cs.r.test(nAgt)) {
+        os = cs.s;
+        break;
+      }
+    }
+
+    var osVersion = unknown;
+
+    if (/Windows/.test(os)) {
+      osVersion = /Windows (.*)/.exec(os)[1];
+      os = 'Windows';
+    }
+
+    switch (os) {
+      case 'Mac OS':
+      case 'Mac OS X':
+      case 'Android':
+        osVersion = /(?:Android|Mac OS|Mac OS X|MacPPC|MacIntel|Mac_PowerPC|Macintosh) ([\.\_\d]+)/.exec(nAgt)[1];
+        break;
+
+      case 'iOS':
+        osVersion = /OS (\d+)_(\d+)_?(\d+)?/.exec(nVer);
+        osVersion = osVersion[1] + '.' + osVersion[2] + '.' + (osVersion[3] | 0);
+        break;
+    }
+
+    // flash (you'll need to include swfobject)
+    /* script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" */
+    var flashVersion = 'no check';
+    if (typeof swfobject != 'undefined') {
+      var fv = swfobject.getFlashPlayerVersion();
+      if (fv.major > 0) {
+        flashVersion = fv.major + '.' + fv.minor + ' r' + fv.release;
+      }
+      else {
+        flashVersion = unknown;
+      }
+    }
+  }
+
+  window.jscd = {
+    screen: screenSize,
+    browser: browser,
+    browserVersion: version,
+    browserMajorVersion: majorVersion,
+    mobile: mobile,
+    os: os,
+    osVersion: osVersion,
+    cookies: cookieEnabled,
+    flashVersion: flashVersion
+  };
 
   var $technicalSpecificationField = $('#request_custom_fields_13077908080401');
 
   if ($technicalSpecificationField.length) {
     $.get('https://api.db-ip.com/v2/free/self', function(data) {
       var fieldValue = 'Platform: ' + window.jscd.os + ' ' + window.jscd.osVersion;
-  		fieldValue += '\nBrowser: ' + window.jscd.browser + ' ' + window.jscd.browserVersion;
-  		fieldValue += '\nViewport: ' + window.jscd.screen;
+      fieldValue += '\nBrowser: ' + window.jscd.browser + ' ' + window.jscd.browserVersion;
+      fieldValue += '\nViewport: ' + window.jscd.screen;
       fieldValue += '\nLanguage: ' + navigator.language;
       fieldValue += '\nIP: ' + data.ipAddress;
       fieldValue += '\nAddress: ' + data.city + ', ' + data.stateProv + ', ' + data.countryName;
@@ -690,10 +705,10 @@ $(function() {
   // get user infos
   var roles = ['anonymous', 'end_user', 'agent', 'manager'];
 
-  var user_role = window.HelpCenter.user.role
+  var user_role = window.HelpCenter.user.role;
   var user_locale = window.HelpCenter.user.locale !== undefined ? window.HelpCenter.user.locale : 'fr-fr';
 
-  if(roles.indexOf(user_role) === -1 && user_role !== undefined) {
+  if (roles.indexOf(user_role) === -1 && user_role !== undefined) {
     roles.push(user_role);
   }
   user_role = user_role === undefined ? roles[0] : user_role;
@@ -707,14 +722,14 @@ $(function() {
     var _templateid = parseInt(_split.split('/')[1]);
   }
 
-  if(urlParams.has('query')) {
-    $('#query').val(urlParams.get("query"))
+  if (urlParams.has('query')) {
+    $('#query').val(urlParams.get('query'));
   }
 
   // get navigation info via breadcrumb
   const $breadcrumb = $('.breadcrumbs');
   let breadcrumb = [];
-  if($breadcrumb.length > 0) {
+  if ($breadcrumb.length > 0) {
     $breadcrumb.find('li').each(function() {
       const $link = $(this).find('a');
       const label = $(this).text().trim();
@@ -727,26 +742,26 @@ $(function() {
         id = parseInt(split[1].split('-')[0]);
       }
 
-      breadcrumb.push({ "label": label, "type": type, "id": id });
-    })
+      breadcrumb.push({'label': label, 'type': type, 'id': id});
+    });
 
-    if(_templatename === 'articles') {
+    if (_templatename === 'articles') {
       breadcrumb.push({
-        "label": $('#main-content h1:first-of-type').text().trim(),
-        "type": _templatename,
-        "id": _templateid
+        'label': $('#main-content h1:first-of-type').text().trim(),
+        'type': _templatename,
+        'id': _templateid
       });
     }
   }
 
   var findCategory = function(breadcrumb) {
-      for (var i = 0; i < breadcrumb.length; i++) {
-          if (breadcrumb[i].type === "categories") {
-              return breadcrumb[i];
-          }
+    for (var i = 0; i < breadcrumb.length; i++) {
+      if (breadcrumb[i].type === 'categories') {
+        return breadcrumb[i];
       }
-      return null;
-  }
+    }
+    return null;
+  };
 
   var categoriesList = function(_categories) {
     $.ajax({
@@ -758,9 +773,9 @@ $(function() {
   };
 
   var $aside = $('.js-aside');
-  if($aside.length > 0) {
+  if ($aside.length > 0) {
     var currentCategoryId = _templatename === 'categories' ? _templateid : findCategory(breadcrumb).id;
-    var _list = ''
+    var _list = '';
     var itemClass = $aside.data('item-class') + ' ';
     var currentItemClass = $aside.data('current-item-class');
     var iconClass = $aside.data('icon-class') + ' ';
@@ -768,21 +783,23 @@ $(function() {
     var icon, url;
 
     var excludedCategories = ['General'];
-    if(!['agent', 'manager'].includes(user_role)) {
+    if (!['agent', 'manager'].includes(user_role)) {
       excludedCategories.push('Interne');
     }
 
-    categoriesList(function(data){
-      $(data.categories).each(function (idx, itm) {
+    categoriesList(function(data) {
+      $(data.categories).each(function(idx, itm) {
         if (!excludedCategories.includes(itm.name)) {
-          icon = $('.js-icons').find('.js-icon-'+itm.id).length > 0 ? $('.js-icons').find('.js-icon-'+itm.id).clone().addClass(iconClass + ' ' + (currentCategoryId === itm.id ? currentIconClass : ''))[0].outerHTML : '';
+          icon = $('.js-icons').find('.js-icon-' + itm.id).length > 0 ? $('.js-icons').find(
+            '.js-icon-' + itm.id).clone().addClass(
+            iconClass + ' ' + (currentCategoryId === itm.id ? currentIconClass : ''))[0].outerHTML : '';
           url = itm.html_url.split('rtbf.be')[1];
-          _list = _list + '<li>'+
+          _list = _list + '<li>' +
             '<a class="' + itemClass + ' ' + (currentCategoryId === itm.id ? currentItemClass : '') +
             '" href="' + itm.html_url + '" id="' + itm.id + '">' +
             icon +
             itm.name +
-            '</a></li>'
+            '</a></li>';
         }
       });
       $('.js-aside').find('.js-list').html(_list);
@@ -793,50 +810,99 @@ $(function() {
     var $target = $('#' + $listToggle.attr('aria-controls'));
 
     $listToggle.on('click', function() {
-      var ariaExpandedValue = $(this).attr('aria-expanded')
+      var ariaExpandedValue = $(this).attr('aria-expanded');
       var isExpanded = ariaExpandedValue === 'true';
-      var labelOn = $(this).data('on')
-      var labelOff = $(this).data('off')
+      var labelOn = $(this).data('on');
+      var labelOff = $(this).data('off');
 
-      $(this).attr('aria-expanded', !isExpanded)
+      $(this).attr('aria-expanded', !isExpanded);
 
       var label = !isExpanded ? labelOn : labelOff;
       $listToggleLabel.text(label);
-      $target.toggleClass('hidden', isExpanded)
-      $listToggle.find('.js-icon').toggleClass('rotate-180', !isExpanded)
-    })
+      $target.toggleClass('hidden', isExpanded);
+      $listToggle.find('.js-icon').toggleClass('rotate-180', !isExpanded);
+    });
   }
 
   // Shortcut List
   const shortcutContentHTML = $('.js-shortcut-content').html();
   const $shortcutPlacholder = $('.js-shortcut-list');
 
-  if($shortcutPlacholder.length > 0) {
-    $shortcutPlacholder.html(shortcutContentHTML)
+  if ($shortcutPlacholder.length > 0) {
+    $shortcutPlacholder.html(shortcutContentHTML);
   }
 });
 
 // P+ AZ
 // lien entre article et formulaire
 $(function() {
-  var afticleForms = {
+  const articleForms = {
     connexion: 19855456949137,
     alerte: 20100548744337,
     mediation: 18756575623057
   };
 
   $('[data-article-contact]').each(function(i, element) {
-    var $element = $(element);
-    var labelName = $element.attr('data-article-contact').split('|').filter(function(identifier) {
-      return !!afticleForms[identifier.toLowerCase()];
+    const $element = $(element);
+    const labelName = $element.attr('data-article-contact').split('|').filter(function(identifier) {
+      return !!articleForms[identifier.toLowerCase()];
     })[0];
 
-    var newRequestURL = '/hc/' + window.theme.locale + '/requests/new';
+    let newRequestURL = '/hc/' + window.theme.locale + '/requests/new';
 
     if (labelName) {
-      newRequestURL += '?ticket_form_id=' + afticleForms[labelName.toLowerCase()];
+      newRequestURL += '?ticket_form_id=' + articleForms[labelName.toLowerCase()];
     }
 
     $element.attr('href', newRequestURL);
+  });
+});
+
+// P+ AZ
+// Form field item search
+$(function() {
+  const formFields = [
+    22172329922833,
+    22173114590737,
+    22172706524177
+  ];
+
+  $.fn.taggerSearchable = function(sel2opt) {
+    $(this).each(function(i, element) {
+      const E = $(element);
+      const tagger = E.data('tagger');
+
+      if (tagger) {
+        E.parent().find('.nesty-input').remove();
+
+        const _S = $('<select />')
+          .addClass('nesty-select');
+
+        tagger.forEach(function(item) {
+          const _O = $('<option />')
+            .attr('value', item.value)
+            .text(item.label);
+
+          _S.append(_O);
+        });
+
+        E.after(_S);
+
+        _S
+          .select2(sel2opt)
+          .change(function(e) {
+            E.val(_S.val());
+          });
+
+        _S.data('select2').$container
+          .addClass('nesty-select2');
+      }
+    });
+
+    return $(this);
+  };
+
+  formFields.forEach(function(fieldId) {
+    $('#request_custom_fields_' + fieldId).taggerSearchable();
   });
 });
