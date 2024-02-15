@@ -17,7 +17,7 @@ let searchFormSelector = "form[role='search']";
 // Clear the search input, and then return focus to it
 function clearSearchInput(event) {
   event.target.closest(searchFormSelector).classList.remove(searchFormFilledClassName);
-  
+
   let input;
   if (event.target.tagName === "INPUT") {
     input = event.target;
@@ -30,7 +30,7 @@ function clearSearchInput(event) {
   input.focus();
 }
 
-// Have the search input and clear button respond 
+// Have the search input and clear button respond
 // when someone presses the escape key, per:
 // https://twitter.com/adambsilver/status/1152452833234554880
 function clearSearchInputOnKeypress(event) {
@@ -40,10 +40,10 @@ function clearSearchInputOnKeypress(event) {
   }
 }
 
-// Create an HTML button that all users -- especially keyboard users -- 
+// Create an HTML button that all users -- especially keyboard users --
 // can interact with, to clear the search input.
 // To learn more about this, see:
-// https://adrianroselli.com/2019/07/ignore-typesearch.html#Delete 
+// https://adrianroselli.com/2019/07/ignore-typesearch.html#Delete
 // https://www.scottohara.me/blog/2022/02/19/custom-clear-buttons.html
 function buildClearSearchButton(inputId) {
   const button = document.createElement("button");
@@ -69,7 +69,7 @@ function appendClearSearchButton(input, form) {
 
 // Add a class to the search form when the input has a value;
 // Remove that class from the search form when the input doesn't have a value.
-// Do this on a delay, rather than on every keystroke. 
+// Do this on a delay, rather than on every keystroke.
 const toggleClearSearchButtonAvailability = debounce(function(event) {
   const form = event.target.closest(searchFormSelector);
   form.classList.toggle(searchFormFilledClassName, event.target.value.length > 0);
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Dropdowns
-  
+
   function Dropdown(toggle, menu) {
     this.toggle = toggle;
     this.menu = menu;
@@ -519,7 +519,7 @@ $(function () {
         else if ((verOffset = nAgt.indexOf('Edge')) != -1) {
             browser = 'Microsoft Legacy Edge';
             version = nAgt.substring(verOffset + 5);
-        } 
+        }
         // Edge (Chromium)
         else if ((verOffset = nAgt.indexOf('Edg')) != -1) {
             browser = 'Microsoft Edge';
@@ -641,7 +641,7 @@ $(function () {
                 osVersion = osVersion[1] + '.' + osVersion[2] + '.' + (osVersion[3] | 0);
                 break;
         }
-        
+
         // flash (you'll need to include swfobject)
         /* script src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js" */
         var flashVersion = 'no check';
@@ -667,9 +667,9 @@ $(function () {
         cookies: cookieEnabled,
         flashVersion: flashVersion
     };
-  
+
   var $technicalSpecificationField = $('#request_custom_fields_13077908080401');
-  
+
   if ($technicalSpecificationField.length) {
     $.get('https://api.db-ip.com/v2/free/self', function(data) {
       var fieldValue = 'Platform: ' + window.jscd.os + ' ' + window.jscd.osVersion;
@@ -686,13 +686,13 @@ $(function () {
 
 // RTBF Custom
 $(function() {
-  
+
   // get user infos
   var roles = ['anonymous', 'end_user', 'agent', 'manager'];
-  
+
   var user_role = window.HelpCenter.user.role
   var user_locale = window.HelpCenter.user.locale !== undefined ? window.HelpCenter.user.locale : 'fr-fr';
-  
+
   if(roles.indexOf(user_role) === -1 && user_role !== undefined) {
     roles.push(user_role);
   }
@@ -720,25 +720,25 @@ $(function() {
       const label = $(this).text().trim();
       const urlParams = $link.length > 0 ? $link.attr('href').split('/fr-fr/') : [];
       let split, type = null, id = null;
-      
+
       if (urlParams.length > 1) {
-        split = urlParams[1].split('/'); 
+        split = urlParams[1].split('/');
         type = split[0];
         id = parseInt(split[1].split('-')[0]);
       }
-      
+
       breadcrumb.push({ "label": label, "type": type, "id": id });
     })
-    
+
     if(_templatename === 'articles') {
       breadcrumb.push({
-        "label": $('#main-content h1:first-of-type').text().trim(), 
-        "type": _templatename, 
-        "id": _templateid 
+        "label": $('#main-content h1:first-of-type').text().trim(),
+        "type": _templatename,
+        "id": _templateid
       });
     }
   }
-  
+
   var findCategory = function(breadcrumb) {
       for (var i = 0; i < breadcrumb.length; i++) {
           if (breadcrumb[i].type === "categories") {
@@ -766,24 +766,24 @@ $(function() {
     var iconClass = $aside.data('icon-class') + ' ';
     var currentIconClass = $aside.data('current-icon-class');
     var icon, url;
-    
+
     var excludedCategories = ['General'];
     if(!['agent', 'manager'].includes(user_role)) {
       excludedCategories.push('Interne');
     }
-    
+
     categoriesList(function(data){
       $(data.categories).each(function (idx, itm) {
         if (!excludedCategories.includes(itm.name)) {
           icon = $('.js-icons').find('.js-icon-'+itm.id).length > 0 ? $('.js-icons').find('.js-icon-'+itm.id).clone().addClass(iconClass + ' ' + (currentCategoryId === itm.id ? currentIconClass : ''))[0].outerHTML : '';
           url = itm.html_url.split('rtbf.be')[1];
           _list = _list + '<li>'+
-            '<a class="' + itemClass + ' ' + (currentCategoryId === itm.id ? currentItemClass : '') + 
-            '" href="' + itm.html_url + '" id="' + itm.id + '">' + 
-            icon + 
-            itm.name + 
+            '<a class="' + itemClass + ' ' + (currentCategoryId === itm.id ? currentItemClass : '') +
+            '" href="' + itm.html_url + '" id="' + itm.id + '">' +
+            icon +
+            itm.name +
             '</a></li>'
-        } 
+        }
       });
       $('.js-aside').find('.js-list').html(_list);
     });
@@ -799,14 +799,14 @@ $(function() {
       var labelOff = $(this).data('off')
 
       $(this).attr('aria-expanded', !isExpanded)
-      
+
       var label = !isExpanded ? labelOn : labelOff;
       $listToggleLabel.text(label);
       $target.toggleClass('hidden', isExpanded)
       $listToggle.find('.js-icon').toggleClass('rotate-180', !isExpanded)
     })
   }
-  
+
   // Shortcut List
   const shortcutContentHTML = $('.js-shortcut-content').html();
   const $shortcutPlacholder = $('.js-shortcut-list');
@@ -814,5 +814,29 @@ $(function() {
   if($shortcutPlacholder.length > 0) {
     $shortcutPlacholder.html(shortcutContentHTML)
   }
+});
 
+// P+ AZ
+// lien entre article et formulaire
+$(function() {
+  var afticleForms = {
+    connexion: 19855456949137,
+    alerte: 20100548744337,
+    mediation: 18756575623057
+  };
+
+  $('[data-article-contact]').each(function(i, element) {
+    var $element = $(element);
+    var labelName = $element.attr('data-article-contact').split('|').filter(function(identifier) {
+      return !!afticleForms[identifier.toLowerCase()];
+    })[0];
+
+    var newRequestURL = '/hc/' + window.theme.locale + '/requests/new';
+
+    if (labelName) {
+      newRequestURL += '?ticket_form_id=' + afticleForms[labelName.toLowerCase()];
+    }
+
+    $element.attr('href', newRequestURL);
+  });
 });

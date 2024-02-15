@@ -1,7 +1,11 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <!-- Make the translated search clear button label available for use in JS -->
 <!-- See buildClearSearchButton() in script.js -->
-<script type="text/javascript">window.searchClearButtonLabelLocalized = "{{t 'search_clear'}}";</script>
+<script type="text/javascript">
+  window.searchClearButtonLabelLocalized = "{{t 'search_clear'}}";
+  window.theme = {};
+  window.theme.locale = {{json_stringify help_center.locale}};
+</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="{{asset 'tailwind-workspace-preset.js' }}"></script>

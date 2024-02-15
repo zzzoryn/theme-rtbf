@@ -136,7 +136,7 @@
             <div class="flex flex-wrap justify-center items-center gap-x-32 mb-10">
               <span class="" id="article-votes-label">{{t 'was_this_article_helpful'}}</span>
               <div class="flex gap-x-10" role="group" aria-labelledby="article-votes-label">
-                {{vote 'up' role='radio' class='thumb-up text-center px-16 py-6 hover:bg-yellow-500' selected_class="bg-yellow-500"}} 
+                {{vote 'up' role='radio' class='thumb-up text-center px-16 py-6 hover:bg-yellow-500' selected_class="bg-yellow-500"}}
                 {{vote 'down' role='radio' class='thumb-down text-center px-16 p-6 hover:bg-sand-500' selected_class="bg-sand-500"}}
               </div>
             </div>
@@ -146,14 +146,13 @@
           </div>
         </div>
         {{/with}}
-    
-        {{!-- 
+
+        {{!--
           {{dc 'cta-form-default'}}
-          {{dc 'cta-form-specific'}} 
+          {{dc 'cta-form-specific'}}
         --}}
 
-        {{!-- default CTA --}}
-        <a class="flex gap-x-16 justify-center items-center my-32 text-heading-700 group" href="/hc/fr-fr/requests/new">
+        <a class="flex gap-x-16 justify-center items-center my-32" href="#" data-article-contact="{{#each article.labels}}{{identifier}}|{{/each}}">
           <span class="inline-block p-10 border-4 border-blue-200 rounded-full">
             <svg class="24" xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
               <path fill-rule="evenodd" clip-rule="evenodd"
@@ -166,7 +165,7 @@
             <span class="text-12 group-hover:underline">Accédez à nos formulaires de contact</span>
           </span>
         </a>
-        
+
         {{!-- specific CTA --}}
         {{!--
           <a class="flex gap-x-16 justify-center items-start my-32 text-heading-700 group" href="/hc/fr-fr/requests/new">
