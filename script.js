@@ -910,6 +910,12 @@ $(function() {
 // P+ AZ
 // Suggested articles
 $(function() {
+  const FORM_ID = parseInt($('#request_issue_type_select').val());
+
+  if (FORM_ID !== 18756575623057) {
+    return;
+  }
+
   const formFields = [
     17085950076305,
     22144210690321,
