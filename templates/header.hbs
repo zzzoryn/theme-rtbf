@@ -1,0 +1,147 @@
+<div class="hidden js-icons">
+  <img class="js-icon-15710409021713" src="{{asset '15710409021713.svg'}}" alt="">
+  <img class="js-icon-15710426013073" src="{{asset '15710426013073.svg'}}" alt="">
+  <img class="js-icon-15713198108305" src="{{asset '15713198108305.svg'}}" alt="">
+  <img class="js-icon-15713240007057" src="{{asset '15713240007057.svg'}}" alt="">
+  <img class="js-icon-15713283624337" src="{{asset '15713283624337.svg'}}" alt="">
+  <img class="js-icon-15713299493521" src="{{asset '15713299493521.svg'}}" alt="">
+  <img class="js-icon-15713307809425" src="{{asset '15713307809425.svg'}}" alt="">
+</div>
+
+<ul class="hidden js-shortcut-content">
+  {{#contains settings.link_href_1 "https://"}}<li><a href="{{settings.link_href_1}}">{{settings.link_label_1}}</a></li>{{/contains}}
+  {{#contains settings.link_href_2 "https://"}}<li><a href="{{settings.link_href_2}}">{{settings.link_label_2}}</a></li>{{/contains}}
+  {{#contains settings.link_href_3 "https://"}}<li><a href="{{settings.link_href_3}}">{{settings.link_label_3}}</a></li>{{/contains}}
+  {{#contains settings.link_href_4 "https://"}}<li><a href="{{settings.link_href_4}}">{{settings.link_label_4}}</a></li>{{/contains}}
+  {{#contains settings.link_href_5 "https://"}}<li><a href="{{settings.link_href_5}}">{{settings.link_label_5}}</a></li>{{/contains}}
+  {{#contains settings.link_href_6 "https://"}}<li><a href="{{settings.link_href_6}}">{{settings.link_label_6}}</a></li>{{/contains}}
+</ul>
+
+<a class="absolute left-10 top-10 z-40 translate-x-[-3000%] overflow-hidden bg-white p-16 text-black outline-none focus:translate-x-0 dark:bg-purple-900 dark:text-white outline outline-0 outline-offset-2 focus:outline-4 focus:outline-white/70" tabindex="1" href="#main-content">{{t 'skip_navigation' }}</a>
+
+<header class="bg-blue-700">
+  <div class="flex justify-between items-center mx-auto container p-16 relative">
+    {{#link 'help_center' class='flex gap-x-32'}}
+      <img class="h-24 md:h-[39px]" src="{{settings.logo_rtbf}}" alt="{{t 'home_page' name=help_center.name}}" />
+      {{#if settings.show_brand_name}}
+        <span aria-hidden="true">{{help_center.name}}</span>
+      {{/if}}
+    {{/link}}
+
+    <div class="nav-wrapper-desktop">
+      <nav class="user-nav" id="user-nav">
+        <ul class="user-nav-list">
+          {{!--
+          <li>{{link 'community'}}</li>
+          --}}
+          <li>{{link 'new_request'}}</li>
+          {{#unless signed_in}}
+            <li>
+              {{#link "sign_in"}}
+                {{t 'sign_in'}}
+              {{/link}}
+            </li>
+          {{/unless}}
+        </ul>
+      </nav>
+      {{#if signed_in}}
+        <div class="user-info dropdown">
+          <button class="dropdown-toggle" aria-haspopup="true">
+            {{user_avatar class="user-avatar"}}
+            {{user_name}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            {{#my_profile role="menuitem"}}{{t 'profile'}}{{/my_profile}}
+            {{link "requests" role="menuitem"}}
+            {{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}
+            {{contact_details role="menuitem"}}
+            {{change_password role="menuitem"}}
+            <div class="separator" role="separator"></div>
+            {{link "sign_out" role="menuitem"}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="nav-wrapper-mobile text-white">
+      <button class="js-menu-button-mobile flex gap-x-16 items-center" aria-controls="user-nav-mobile" aria-expanded="false" aria-label="{{t 'toggle_navigation'}}">
+        {{#if signed_in}}
+          {{user_avatar class="user-avatar"}}
+        {{/if}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-menu">
+          <path fill="none" stroke="currentColor" stroke-linecap="round" d="M1.5 3.5h13m-13 4h13m-13 4h13"/>
+        </svg>
+      </button>
+      <nav class="menu-list-mobile" id="user-nav-mobile" aria-expanded="false">
+        <ul class="menu-list-mobile-items">
+          {{#if signed_in}}
+            <li class="user-avatar-item item">
+              {{#my_profile role="menuitem" class="my-profile"}}
+                {{user_avatar class="menu-profile-avatar"}}
+                <div class="menu-profile-name">
+                  <div>{{user_name}}</div>
+                  <div class="my-profile-tooltip">{{t 'profile'}}</div>
+                </div>
+              {{/my_profile}}
+            </li>
+            <li class="item">{{link "requests" role="menuitem"}}</li>
+            <li class="item">{{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}</li>
+            <li class="item">{{contact_details role="menuitem"}}</li>
+            <li class="item">{{change_password role="menuitem" class='change-password'}}</li>
+            <li class="nav-divider"></li>
+          {{else}}
+            <li class="item">
+              {{#link "sign_in" role="menuitem"}}
+                {{t 'sign_in'}}
+              {{/link}}
+            </li>
+            <li class="nav-divider"></li>
+          {{/if}}
+          <li class="item">{{link 'community' role="menuitem"}}</li>
+          <li class="item">{{link 'new_request' role="menuitem" class='submit-a-request'}}</li>
+          <li class="nav-divider"></li>
+          {{#if signed_in}}
+            <li class="item">
+              {{link "sign_out" role="menuitem"}}
+            </li>
+          {{/if}}
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="rtbf-hero h-[300px] flex items-center justify-center">
+    <div class="container fkex">
+      <h2 class="text-white text-16 md:text-24 mb-12"><label class="cursor-pointer" for="query">Comment pouvons-nous vous aider ?</label></h2>
+      <div class="relative">
+        {{search submit=false instant=settings.instant_search placeholder='Rechercher un article, un sujet, ...'
+        class='search h-[60px]'}}
+        <svg xmlns="http://www.w3.org/2000/svg" focusable="false" viewBox="0 0 12 12"
+          class="absolute h-[60px] px-12 py-18 top-0 left-0" aria-hidden="true">
+          <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor" />
+          <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{#if settings.show_rtbf_alert}}
+<div class="bg-yellow-300">
+  <div class="container py-10 flex justify-center items-center gap-x-16">
+    <div class="hidden md:inline-block bg-yellow-500 p-16 rounded-full">
+      <img alt="" src="{{asset 'shield-exclamation.svg'}}">
+    </div>
+    <div>
+      <p class="md:pb-4"><strong>{{settings.rtbf_alert_title}}</strong></p>
+      <p>{{settings.rtbf_alert_description}}</p>
+    </div>
+  </div>
+</div>
+{{/if}}

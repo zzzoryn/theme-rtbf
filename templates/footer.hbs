@@ -1,0 +1,74 @@
+<footer class="text-12 text-heading-700 border-b-footer-bottom-border border-blue-700">
+  <div class="container border-t-1 border-navy-blue-100 mt-24 pt-24">
+    <section class="flex flex-col text-center md:flex-row md:flex-wrap md:pb-16 md:text-left">
+      <p class="w-full grow  pb-6 font-bold text-heading-700">{{ settings.rtbf_copyright }}</p>
+      <nav class="flex shrink grow flex-col text-content-700 md:w-9/12" aria-label="La RTBF et vous">
+        <ul class="flex flex-row flex-wrap justify-center px-16 font-normal md:justify-start md:px-0">
+          <li class="flex flex-row items-center leading-24"><a
+              class="py-6 pr-2 transition-colors duration-300 hover:text-navy-blue-700 outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+              href="https://www.rtbf.be/declaration-accessibilite_rtbf_v_1_0.pdf">Déclaration d'accessibilité</a>
+            <div class="mx-8 h-4 w-4 rounded-full bg-yellow-500">&nbsp;</div>
+          </li>
+          <li class="flex flex-row items-center leading-24"><a
+              class="py-6 px-2 transition-colors duration-300 hover:text-navy-blue-700 outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+              href="https://www.rtbf.be/charte/detail#mentionslegales">Mentions légales</a>
+            <div class="mx-8 h-4 w-4 rounded-full bg-yellow-500">&nbsp;</div>
+          </li>
+          <li class="flex flex-row items-center leading-24"><a
+              class="py-6 px-2 transition-colors duration-300 hover:text-navy-blue-700 outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+              href="https://www.rtbf.be/cgu">Conditions Générales</a>
+            <div class="mx-8 h-4 w-4 rounded-full bg-yellow-500">&nbsp;</div>
+          </li>
+          <li class="flex flex-row items-center leading-24"><a
+              class="py-6 px-2 transition-colors duration-300 hover:text-navy-blue-700 outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+              href="https://www.rtbf.be/cookies">Politique des Cookies</a>
+            <div class="mx-8 h-4 w-4 rounded-full bg-yellow-500">&nbsp;</div>
+          </li>
+          <li class="flex flex-row items-center leading-24">
+            <a
+              class="py-6 px-2 transition-colors duration-300 hover:text-navy-blue-700 outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+              href="javascript:Didomi.preferences.show()">Modifier les cookies</a>
+            <div class="mx-8 h-4 w-4 rounded-full bg-yellow-500">&nbsp;</div>
+          </li>
+          <li class="flex flex-row items-center leading-24"><a
+              class="py-6 px-2 transition-colors duration-300 hover:text-navy-blue-700 outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+              href="https://www.rtbf.be/cgu/droit-a-l-oubli">Droit à l'oubli</a>
+            <div class="mx-8 h-4 w-4 rounded-full bg-yellow-500">&nbsp;</div>
+          </li>
+          <li class="flex flex-row items-center leading-24"><a
+              class="py-6 px-2 transition-colors duration-300 hover:text-navy-blue-700 outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+              href="https://www.rtbf.be/charte/detail">Vie privée</a>
+          </li>
+        </ul>
+      </nav>
+      <div
+        class="mt-48 mb-24 flex min-w-[100px] shrink-0 justify-center self-center text-heading-500 md:my-0 md:w-3/12 md:justify-end md:self-end lg:my-0 lg:justify-center">
+        <a class="block w-100 py-12 px-2 text-center md:text-right outline outline-0 outline-offset-2 focus:outline-4 focus:outline-focus"
+          aria-label="CIM Internet" href="http://www.cim.be/fr/internet/disclaimer-cim-internet"><img alt="CIM Internet"
+            src="https://www.rtbf.be/icons/custom/brands/black/cim-internet.svg"
+            class="h-32 w-100 filter-heading-500"
+            aria-label="CIM Internet" aria-hidden="false" role="img" width="100" height="32" loading="lazy"
+            pinger-seen="true"></a></div>
+    </section>
+
+    <div class="hidden footer-language-selector">
+      {{#if alternative_locales}}
+        <div class="dropdown language-selector">
+          <button class="dropdown-toggle" aria-haspopup="true">
+            {{current_locale.name}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+            </svg>
+          </button>
+          <span class="dropdown-menu dropdown-menu-end" role="menu">
+            {{#each alternative_locales}}
+              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
+                {{name}}
+              </a>
+            {{/each}}
+          </span>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</footer>

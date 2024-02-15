@@ -1,0 +1,25 @@
+<div id="main-content" class="container flex flex-col items-center pt-16 gap-16 lg:flex-row">
+  <img class="lg:w-1/2 mx-auto" src="{{ asset 'error.svg'}}" alt="">
+  <div>
+    <h1 class="text-30 font-extrabold">{{t 'oops'}}</h1>
+    
+    {{#is error 'unauthorized'}}
+    <h2 class="font-24 font-bold mb-16">{{link 'sign_in'}}</h2>
+    {{/is}}
+    
+    {{#is error 'forbidden'}}
+    <h2 class="font-24 font-bold mb-16">{{t 'not_authorized'}}</h2>
+    {{/is}}
+    
+    {{#is error 'not_found'}}
+    <h2 class="font-24 font-bold mb-16">{{t 'nonexistent_page'}}</h2>
+    <p>{{t 'mistyped_address_or_moved_page'}}</p>
+    {{/is}}
+    
+    <div class="prose mt-24">
+      {{#link 'help_center'}}
+      {{t 'back_to_homepage'}}
+      {{/link}}
+    </div>
+  </div>
+</div>

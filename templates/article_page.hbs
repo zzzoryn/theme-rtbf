@@ -1,0 +1,363 @@
+<div class="container px-0 lg:px-16 lg:flex">
+  <aside class="js-aside flex flex-col bg-blue-600 shrink-0 lg:w-[300px] lg:max-w-1/3 lg:-ms-16"
+    data-icon-class="me-10 filter-blue"
+    data-item-class="flex items-center py-10 pe-16 ps-32 block font-bold text-white hover:text-blue-200 transition-colors duration-200 ease-in-out"
+    data-current-item-class="bg-background-light text-blue-700 hover:text-blue-700 hover:no-underline"
+    data-current-icon-class="filter-blue-900">
+    <button
+      class="js-list-toggle w-full text-center px-10 py-16 font-bold text-white cursor-pointer flex items-center justify-center gap-x-10 lg:hidden"
+      data-on="Réduire les catégories" data-off="Afficher les catégories" aria-expanded="false"
+      aria-controls="aside-nav">
+      <h2><span class="js-list-toggle-label">Afficher les catégories </span></h2>
+      <svg xmlns="http://www.w3.org/2000/svg" class="js-icon h-12 filter-white" viewBox="0 0 24 24" fill="none">
+        <path d="M19 9L12 16L5 9" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <ul id="aside-nav" class="js-list hidden lg:flex flex-col gap-y-24 pb-16"></ul>
+    <section class="rtbf-shortcut-list hidden lg:block">
+      <h2>Accès direct</h2>
+      <ul class="js-shortcut-list"></ul>
+    </section>
+  </aside>
+  <div class="px-16 lg:min-h-fill">
+    <nav class="pt-16 pb-10 mb-16 border-b-1 border-blue-100">{{breadcrumbs}}</nav>
+    <article id="main-content">
+      <header>
+        <h1 class="font-extrabold text-36 leading-48 mt-16 mb-16 text-heading-900" title="{{article.title}}">
+          {{article.title}}
+          {{#if article.internal}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 16 16" class="inline-block" title="{{t 'internal'}}">
+              <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
+              <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
+            </svg>
+          {{/if}}
+        </h1>
+
+        <div>
+          {{#if settings.show_article_author}}
+            <div>
+              {{#if article.author.agent}}
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" aria-label="{{t 'team_member' name=article.author.name}}">
+                  <path fill="currentColor" d="M6 0C2.7 0 0 2.7 0 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm2.3 7H3.7c-.3 0-.4-.3-.3-.5C3.9 7.6 4.9 7 6 7s2.1.6 2.6 1.5c.1.2 0 .5-.3.5z"/>
+                </svg>
+              {{/if}}
+              <img src="{{article.author.avatar_url}}" alt="">
+            </div>
+          {{/if}}
+          <div>
+            {{#if settings.show_article_author}}
+              {{#link 'user_profile' id=article.author.id}}
+                {{article.author.name}}
+              {{/link}}
+            {{/if}}
+
+            <ul class="flex gap-x-10 text-heading-500 text-14 mb-16">
+              {{#is article.created_at article.edited_at}}
+                <li>{{date article.created_at timeago=true}}</li>
+              {{else}}
+                <li>{{date article.edited_at timeago=true}}</li>
+                <li>{{t 'updated'}}</li>
+              {{/is}}
+            </ul>
+          </div>
+        </div>
+
+        {{#if settings.show_follow_article}}
+          <div>{{subscribe}}</div>
+        {{/if}}
+      </header>
+
+      <section>
+        <div>
+          <div class="prose">
+            {{article.body}}
+          </div>
+
+          {{#if (compare article.content_tags.length ">" 0)}}
+            <section>
+              <p class="font-bold text-24">{{t 'content_tags_label'}}</p>
+              <div class="prose">
+                <ul>
+                  {{#each article.content_tags}}
+                    <li data-content-tag-id="{{id}}">
+                      {{#link "search_result" content_tag_id=id}}
+                        {{name}}
+                      {{/link}}
+                    </li>
+                  {{/each}}
+                </ul>
+              </div>
+            </section>
+          {{/if}}
+
+          {{#if attachments}}
+            <div>
+              <ul>
+                {{#each attachments}}
+                  <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16">
+                      <path fill="none" stroke="currentColor" stroke-linecap="round" d="M9.5 4v7.7c0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5V3C6.5 1.6 7.6.5 9 .5s2.5 1.1 2.5 2.5v9c0 1.9-1.6 3.5-3.5 3.5S4.5 13.9 4.5 12V4"/>
+                    </svg>
+                    <a href="{{url}}" target="_blank">{{name}}</a>
+                    <div>
+                      <span>{{size}}</span>
+                      <a href="{{url}}" target="_blank">{{t 'download'}}</a>
+                    </div>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          {{#if settings.show_article_sharing}}
+            <div class="py-10">{{share}}</div>
+          {{/if}}
+          {{#if settings.show_article_comments}}
+            {{#if comments}}
+              <a href="#article-comments">
+                <svg role="img" aria-labelledby="article-comments-title article-comments-desc" xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12">
+                  <title id="article-comments-title">{{t 'go_to_comments'}}</title>
+                  <desc id="article-comments-desc">{{t 'comments_count' count=article.comment_count}}</desc>
+                  <path fill="none" stroke="currentColor" d="M1 .5h10c.3 0 .5.2.5.5v7c0 .3-.2.5-.5.5H6l-2.6 2.6c-.3.3-.9.1-.9-.4V8.5H1C.7 8.5.5 8.3.5 8V1C.5.7.7.5 1 .5z"/>
+                </svg>
+                <span aria-hidden="true">{{article.comment_count}}</span>
+              </a>
+            {{/if}}
+          {{/if}}
+        </div>
+        {{#with article}}
+        <div class="flex">
+
+          <div class="flex flex-col border-y-1 border-blue-100 p-16 my-16 mx-auto justify-center items-center">
+            <div class="flex flex-wrap justify-center items-center gap-x-32 mb-10">
+              <span class="" id="article-votes-label">{{t 'was_this_article_helpful'}}</span>
+              <div class="flex gap-x-10" role="group" aria-labelledby="article-votes-label">
+                {{vote 'up' role='radio' class='thumb-up text-center px-16 py-6 hover:bg-yellow-500' selected_class="bg-yellow-500"}} 
+                {{vote 'down' role='radio' class='thumb-down text-center px-16 p-6 hover:bg-sand-500' selected_class="bg-sand-500"}}
+              </div>
+            </div>
+            <small>
+              {{vote 'label' class=''}}
+            </small>
+          </div>
+        </div>
+        {{/with}}
+    
+        {{!-- 
+          {{dc 'cta-form-default'}}
+          {{dc 'cta-form-specific'}} 
+        --}}
+
+        {{!-- default CTA --}}
+        <a class="flex gap-x-16 justify-center items-center my-32 text-heading-700 group" href="/hc/fr-fr/requests/new">
+          <span class="inline-block p-10 border-4 border-blue-200 rounded-full">
+            <svg class="24" xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M18.3489 2.47193C17.9258 2.06513 17.2399 2.06513 16.8168 2.47193L7.83285 11.1104L7.83285 12.5835H9.36491L18.3489 3.94507C18.7719 3.53827 18.7719 2.87872 18.3489 2.47193ZM15.2847 0.998787C16.554 -0.221601 18.6117 -0.221601 19.8809 0.998787C21.1501 2.21918 21.1501 4.19782 19.8809 5.41821L10.5797 14.3617C10.3765 14.5571 10.101 14.6668 9.81364 14.6668H6.74951C6.1512 14.6668 5.66618 14.2005 5.66618 13.6252L5.66618 10.6789C5.66618 10.4026 5.78032 10.1377 5.98348 9.94232L15.2847 0.998787ZM3.49951 4.25017C2.9012 4.25017 2.41618 4.71654 2.41618 5.29183V16.7502C2.41618 17.3255 2.9012 17.7918 3.49951 17.7918H15.4162C16.0145 17.7918 16.4995 17.3255 16.4995 16.7502V11.5418C16.4995 10.9665 16.9845 10.5002 17.5828 10.5002C18.1812 10.5002 18.6662 10.9665 18.6662 11.5418V16.7502C18.6662 18.4761 17.2111 19.8752 15.4162 19.8752H3.49951C1.70459 19.8752 0.249512 18.4761 0.249512 16.7502V5.29183C0.249512 3.56594 1.70459 2.16683 3.49951 2.16683H8.91618C9.51449 2.16683 9.99951 2.6332 9.99951 3.2085C9.99951 3.7838 9.51449 4.25017 8.91618 4.25017H3.49951Z"
+                fill="#203442" />
+            </svg>
+          </span>
+          <span class="flex flex-col">
+            <span class="uppercase font-extrabold text-16 text-heading-900">Vous souhaitez nous écrire&nbsp;?</span>
+            <span class="text-12 group-hover:underline">Accédez à nos formulaires de contact</span>
+          </span>
+        </a>
+        
+        {{!-- specific CTA --}}
+        {{!--
+          <a class="flex gap-x-16 justify-center items-start my-32 text-heading-700 group" href="/hc/fr-fr/requests/new">
+            <span class="inline-block p-10 border-4 border-blue-200 rounded-full">
+              <svg class="24" xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M18.3489 2.47193C17.9258 2.06513 17.2399 2.06513 16.8168 2.47193L7.83285 11.1104L7.83285 12.5835H9.36491L18.3489 3.94507C18.7719 3.53827 18.7719 2.87872 18.3489 2.47193ZM15.2847 0.998787C16.554 -0.221601 18.6117 -0.221601 19.8809 0.998787C21.1501 2.21918 21.1501 4.19782 19.8809 5.41821L10.5797 14.3617C10.3765 14.5571 10.101 14.6668 9.81364 14.6668H6.74951C6.1512 14.6668 5.66618 14.2005 5.66618 13.6252L5.66618 10.6789C5.66618 10.4026 5.78032 10.1377 5.98348 9.94232L15.2847 0.998787ZM3.49951 4.25017C2.9012 4.25017 2.41618 4.71654 2.41618 5.29183V16.7502C2.41618 17.3255 2.9012 17.7918 3.49951 17.7918H15.4162C16.0145 17.7918 16.4995 17.3255 16.4995 16.7502V11.5418C16.4995 10.9665 16.9845 10.5002 17.5828 10.5002C18.1812 10.5002 18.6662 10.9665 18.6662 11.5418V16.7502C18.6662 18.4761 17.2111 19.8752 15.4162 19.8752H3.49951C1.70459 19.8752 0.249512 18.4761 0.249512 16.7502V5.29183C0.249512 3.56594 1.70459 2.16683 3.49951 2.16683H8.91618C9.51449 2.16683 9.99951 2.6332 9.99951 3.2085C9.99951 3.7838 9.51449 4.25017 8.91618 4.25017H3.49951Z"
+                  fill="#203442" />
+              </svg>
+            </span>
+            <span class="flex flex-col group-hover:underline gap-y-10">
+              <span class="text-12 font-bold">Problème de connexion&nbsp;?</span>
+              <span class="text-12 font-bold">Alertez-nous&nbsp;: Partagez vos infos avec la rédaction</span>
+              <span class="text-12 font-bold">Problème technique, contenu et émissions, médiation&nbsp;: Contactez-nous</span>
+            </span>
+          </a>
+        --}}
+
+        <div class="md:hidden">
+          <a href="#article-container">
+            {{t 'return_to_top'}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+            </svg>
+          </a>
+        </div>
+
+      </footer>
+
+      <div>
+        {{#if settings.show_recently_viewed_articles}}
+          {{recent_articles}}
+        {{/if}}
+        {{#if settings.show_related_articles}}
+          {{related_articles}}
+        {{/if}}
+      </div>
+      {{#if settings.show_article_comments}}
+        <div id="article-comments">
+          <section>
+            <header>
+              <h2>
+                {{t 'comments'}}
+              </h2>
+              <p>{{t 'comments_count' count=article.comment_count}}</p>
+              {{#if comments}}
+                <div>
+                  <button aria-haspopup="true">
+                    {{t 'sort_by'}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12">
+                      <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
+                    </svg>
+                  </button>
+                  <span role="menu">
+                    {{#each comment_sorters}}
+                      <a aria-selected="{{selected}}" href="{{url}}" role="menuitem">{{name}}</a>
+                    {{/each}}
+                  </span>
+                </div>
+              {{/if}}
+            </header>
+
+            <ul id="comments">
+              {{#each comments}}
+                <li id="{{anchor}}">
+                  <div>
+                    <div>
+                      <div>
+                        <div>
+                          {{#if author.agent}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" aria-label="{{t 'team_member' name=author.name}}">
+                              <path fill="currentColor" d="M6 0C2.7 0 0 2.7 0 6s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm2.3 7H3.7c-.3 0-.4-.3-.3-.5C3.9 7.6 4.9 7 6 7s2.1.6 2.6 1.5c.1.2 0 .5-.3.5z"/>
+                            </svg>
+                          {{/if}}
+                          <img src="{{author.avatar_url}}" alt="">
+                        </div>
+                        <div>
+                          <span title="{{author.name}}">
+                            {{#link 'user_profile' id=author.id}}
+                              {{author.name}}
+                            {{/link}}
+                          </span>
+
+                          <span aria-label="{{t 'badges'}}">
+                            {{#each (filter author.badges on="category_slug" equals="titles")}}
+                              <div title="{{description}}" aria-label="{{name}}">
+                                {{name}}
+                              </div>
+                            {{/each}}
+                          </span>
+
+                          <ul>
+                            {{#if editor}}
+                              <li>{{date edited_at timeago=true}}</li>
+                              <li>{{t 'edited'}}</li>
+                            {{else}}
+                              <li>{{date created_at timeago=true}}</li>
+                            {{/if}}
+                          </ul>
+
+                          <div aria-label="{{t 'badges'}}">
+                            {{#each (
+                              slice
+                                (
+                                  filter
+                                    (filter author.badges on="category_slug" equals="achievements")
+                                    on="icon_url"
+                                    starts_with="https"
+                                )
+                                0
+                                4
+                              )
+                            }}
+                              <div>
+                                <img src="{{icon_url}}" alt="{{name}}" title="{{name}} | {{description}}" />
+                              </div>
+                            {{/each}}
+
+                            {{#if (compare (calc author.badges.length "-" 4) ">" 0)}}
+                              <div>
+                                <a href="{{page_path "user_profile" id=author.id filter_by="badges"}}" class="community-badge-achievements-rest"  aria-label="{{t 'more_awards_to' count=(calc author.badges.length "-" 4) name=author.name}}">
+                                  {{t 'plus_more' count=(calc author.badges.length "-" 4)}}
+                                </a>
+                              </div>
+                            {{/if}}
+                          </div>
+                        </div>
+                        <div>
+                          {{#with ticket}}
+                            <a href="{{url}}" target="_zendesk_lotus">
+                              {{t 'request'}}{{id}}
+                            </a>
+                          {{/with}}
+                          {{#if pending}}
+                            <span>{{t 'pending_approval'}}</span>
+                          {{/if}}
+                        </div>
+                      </div>
+
+                      <section>{{body}}</section>
+                    </div>
+
+                    <div>
+                      <div role="group">
+                        {{#vote 'up' role='radio' class='' selected_class=''}}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16">
+                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 6.5l3.6 3.6c.2.2.5.2.7 0L12 6.5"/>
+                        </svg>
+                        {{/vote}}
+                        {{vote 'sum' class=''}}
+                        {{#vote 'down' role='radio' class='' selected_class=''}}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16">
+                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M4 6.5l3.6 3.6c.2.2.5.2.7 0L12 6.5"/>
+                        </svg>
+                        {{/vote}}
+                      </div>
+                      <div>
+                        {{#actions}}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16">
+                          <path fill="none" stroke="currentColor" d="M13.17 3.07l-1.64.71c-.48-.4-1.03-.72-1.63-.94l-.22-1.79a.511.511 0 00-.4-.44C8.86.54 8.44.5 8 .5c-.44 0-.86.04-1.28.11-.22.04-.38.22-.4.44l-.21 1.79c-.6.22-1.15.54-1.63.94l-1.65-.71a.491.491 0 00-.58.13c-.55.65-.99 1.4-1.29 2.21-.08.21 0 .44.18.58l1.45 1.08a4.91 4.91 0 000 1.87l-1.45 1.08c-.18.13-.25.37-.18.58.3.81.74 1.55 1.28 2.2.14.17.38.22.58.13l1.65-.71c.48.4 1.03.72 1.63.94l.21 1.79c.03.22.19.4.4.44.43.07.85.11 1.29.11.44 0 .86-.04 1.28-.11.22-.04.38-.22.4-.44l.21-1.79c.6-.22 1.15-.54 1.63-.94l1.65.71c.2.09.44.04.58-.13.54-.65.98-1.39 1.28-2.2.08-.21 0-.44-.18-.57L13.4 8.95c.07-.32.1-.63.1-.95s-.03-.63-.09-.94l1.45-1.08c.18-.13.25-.37.18-.58-.3-.81-.74-1.55-1.28-2.2a.51.51 0 00-.59-.13z"/>
+                          <circle cx="8" cy="8" r="2.5" fill="none" stroke="currentColor"/>
+                        </svg>
+                        {{/actions}}
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+
+            {{pagination}}
+
+            {{#form 'comment'}}
+              <div>
+                {{user_avatar}}
+              </div>
+              <div>
+                {{wysiwyg 'body'}}
+                <div>
+                  {{input type='submit'}}
+                </div>
+              </div>
+            {{/form}}
+
+            <p>{{comment_callout}}</p>
+          </section>
+        </div>
+      {{/if}}
+    </article>
+</div>
+<section class="rtbf-shortcut-list lg:hidden">
+  <h2>Accès direct</h2>
+  <ul class="js-shortcut-list"></ul>
+</section>

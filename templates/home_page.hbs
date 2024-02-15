@@ -1,0 +1,76 @@
+<h1 class="sr-only">{{ help_center.name }}</h1>
+<section id="main-content">
+  <div class="bg-blue-600 md:bg-blue-700">
+    <h2 class="sr-only">{{ t 'categories' }}</h2>
+    <ul class="container md:grid md:grid-cols-4 xl:grid-flow-col xl:auto-cols-fr">
+      {{#each categories}}
+        <li class="md:odd:bg-blue-600 item">
+          <a href='{{url}}' class="flex md:flex-col items-center p-10 md:p-32 h-full gap-y-10 group">
+            <span class="md:h-32">
+              {{#is id 15710409021713}}<img class="mr-10 md:mx-auto h-32 w-32 filter-blue" src="{{asset '15710409021713.svg'}}" alt="{{name}}">{{/is}}
+              {{#is id 15710426013073}}<img class="mr-10 md:mx-auto h-32 w-32 filter-blue" src="{{asset '15710426013073.svg'}}" alt="{{name}}">{{/is}}
+              {{#is id 15713198108305}}<img class="mr-10 md:mx-auto h-32 w-32 filter-blue" src="{{asset '15713198108305.svg'}}" alt="{{name}}">{{/is}}
+              {{#is id 15713240007057}}<img class="mr-10 md:mx-auto h-32 w-32 filter-blue" src="{{asset '15713240007057.svg'}}" alt="{{name}}">{{/is}}
+              {{#is id 15713283624337}}<img class="mr-10 md:mx-auto h-32 w-32 filter-blue" src="{{asset '15713283624337.svg'}}" alt="{{name}}">{{/is}}
+              {{#is id 15713299493521}}<img class="mr-10 md:mx-auto h-32 w-32 filter-blue" src="{{asset '15713299493521.svg'}}" alt="{{name}}">{{/is}}
+              {{#is id 15713307809425}}<img class="mr-10 md:mx-auto h-32 w-32 filter-blue" src="{{asset '15713307809425.svg'}}" alt="{{name}}">{{/is}}
+            </span>
+            <span class="text-center text-white group-hover:text-blue-200 transition-colors ease-in-out duration-200 font-bold">{{name}}</span>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="container lg:min-h-fill">
+    {{pagination}}
+    {{#if promoted_articles}}
+      <section class="mt-16">
+        <h2 class="text-heading-900 font-extrabold text-16 uppercase lg:text-32">{{t 'promoted_articles'}}</h2>
+        <ul class="xl:grid xl:grid-cols-2 xl:gap-x-16">
+          {{#each promoted_articles}}
+            <li>
+                <a class="group transition-colors ease-in-out items-center duration-200 mb-6 border-b-1 border-blue-100 gap-x-16 w-full p-16 flex font-bold text-primary hover:text-primary/80" href="{{url}}">
+                  <span class="grow group-hover:translate-x-4 transition-transform duration-200 ease-in-out">
+                    {{title}}
+                  </span>
+                  {{#if internal}}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
+                      <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
+                      <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
+                    </svg>
+                  {{/if}}
+                  <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 h-24 w-24 filter-primary -rotate-90" viewBox="0 0 24 24"
+                    fill="none">
+                    <path d="M19 9L12 16L5 9" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+    {{/if}}
+  </div>
+</section>
+{{!--
+{{#if help_center.community_enabled}}
+  <section>
+    <h2>{{t 'community'}}</h2>
+    {{#link 'community' class='community-link'}}
+      {{t 'join_conversation'}}
+    {{/link}}
+
+    <div class="community-image"></div>
+  </section>
+{{/if}}
+--}}
+<section>
+  {{#if settings.show_recent_activity}}
+    {{recent_activity}}
+  {{/if}}
+</section>
+<section class="rtbf-shortcut-list rtbf-shortcut-list--home">
+  <div class="container">
+    <h2>Accès direct</h2>
+    <ul class="js-shortcut-list"></ul>
+  </div>
+</section>

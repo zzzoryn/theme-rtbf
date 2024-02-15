@@ -1,0 +1,196 @@
+body #didomi-host .didomi-popup-container {
+  background-color: #fff;
+  color: #3e5463;
+}
+
+body #didomi-host h2 {
+  color: #1f2937;
+  font-size: 34px;
+  line-height: 40px;
+}
+
+body #didomi-host a:not(.didomi-no-link-style) {
+  color: #004594 !important;
+}
+
+body #didomi-host .didomi-buttons .didomi-button.didomi-button-standard {
+  background-color: transparent !important;
+  color: #00507d !important;
+  border: 2px solid #00507d !important;
+}
+
+body #didomi-host .didomi-popup-header {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  color: #1f2937;
+}
+
+body #didomi-host .didomi-consent-popup-body__explanation span {
+  color: #33355a;
+}
+
+body #didomi-host .didomi-consent-popup-body .didomi-consent-popup-body__title {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+  color: #3b424a;
+}
+
+body #didomi-host .didomi-consent-popup-preferences .didomi-consent-popup-vendor,
+body #didomi-host .didomi-consent-popup-preferences-purposes .didomi-consent-popup-data-processing {
+  background-color: transparent;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+body #didomi-host .didomi-consent-popup-preferences .didomi-consent-popup-vendor .label-click,
+body #didomi-host .didomi-consent-popup-preferences-purposes .didomi-consent-popup-data-processing .label-click {
+  color: #33355a;
+}
+
+body #didomi-host .didomi-components-accordion .trigger-icon {
+  color: #fdc300;
+}
+
+body #didomi-host .didomi-components-radio__option,
+body #didomi-host .didomi-consent-popup-preferences-purposes .didomi-consent-popup-view-vendors-list .didomi-consent-popup-view-vendors-list-link {
+  background-color: transparent;
+  border: 1px solid #4a5768;
+  border-radius: 15px;
+  padding: 6px 24px;
+  color: #4a5768;
+  font-size: 13px;
+  line-height: 13px;
+  height: auto;
+  font-weight: 500;
+}
+
+body #didomi-host .didomi-components-radio__option:hover {
+  background-color: #ececec;
+  border-color: #4a5768;
+}
+
+body #didomi-host .didomi-components-radio__option.didomi-components-radio__option--agree,
+body #didomi-host .didomi-components-radio__option.didomi-components-radio__option--disagree {
+  color: white;
+  padding: 6px 24px;
+  font-weight: 500;
+}
+
+body #didomi-host .didomi-components-radio__option.didomi-components-radio__option--agree {
+  background-color: #018489;
+  border-color: #018489;
+}
+
+body #didomi-host .didomi-components-radio__option.didomi-components-radio__option--disagree {
+  background-color: #db1f48;
+  border-color: #db1f48;
+}
+
+body #didomi-host .didomi-components-radio__option.didomi-components-radio__option--disagree svg,
+body #didomi-host .didomi-components-radio__option.didomi-components-radio__option--agree svg {
+  display: none;
+}
+
+body #didomi-host .didomi-consent-popup-preferences-purposes .didomi-consent-popup-data-processing__description_legal_icon svg {
+  display: inline-block;
+}
+
+body #didomi-host #didomi-popup-vendors-all,
+body #didomi-host .didomi-consent-popup-preferences-purposes .didomi-consent-popup-data-processing__purpose_actions .didomi-consent-popup-data-processing__purpose_actions_title {
+  color: #3b424a;
+  font-weight: 500;
+}
+
+body #didomi-host .didomi-consent-popup-preferences-vendors .didomi-consent-popup-body_vendors-list {
+  border: none;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+body #didomi-host .didomi-consent-popup-preferences-vendors .didomi-vendors-details-title {
+  color: #3b424a;
+}
+
+body #didomi-host .didomi-no-link-style.didomi-popup-close {
+  color: #dfac00;
+}
+
+body #didomi-host .didomi-consent-popup-preferences-vendors .didomi-popup-title .didomi-arrow-back-popup-preferences-vendors {
+  color: #fdc300;
+  margin-right: 5px;
+}
+
+body #didomi-host .didomi-consent-popup-preferences-purposes .didomi-consent-popup-data-processing__purpose_actions {
+  background-color: transparent;
+  padding-right: 0;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+body #didomi-host .didomi-popup-notice .didomi-popup-notice-logo {
+  filter: none;
+  width: 120px;
+}
+
+body #didomi-host .didomi-components-accordion .didomi-content.active>div>span {
+  color: #4a5768;
+}
+
+body #didomi-host .didomi-components-accordion .didomi-content.active>div>span::after {
+  background-color: rgb(243, 243, 243);
+}
+
+body #didomi-host .didomi-popup-notice .didomi-popup-notice-subtext,
+body #didomi-host .didomi-popup-notice .didomi-popup-notice-text {
+  max-width: none;
+  color: #4a5768;
+}
+
+body #didomi-host .didomi-popup-notice .didomi-popup-notice-text br {
+  display: none;
+}
+
+body #didomi-host [datatooltip]:focus::after {
+  background-color: rgb(243, 243, 243);
+}
+
+body #didomi-host .didomi-notice-data-processing-container .didomi-notice-data-processing-title {
+  color: #333;
+}
+
+@media screen and (max-width: 1024px) {
+  body #didomi-host .didomi-mobile #didomi-consent-popup .didomi-consent-popup-preferences .didomi-consent-popup-data-processing {
+    display: block;
+  }
+
+  body #didomi-host .didomi-components-radio {
+    justify-content: start;
+  }
+}
+
+body #didomi-host .didomi-mobile .didomi-notice-data-processing-container .didomi-notice-data-processing-list {
+  color: #777;
+}
+
+body #didomi-host .didomi-consent-popup-preferences-purposes .didomi-consent-popup-data-processing__description {
+  color: #000;
+}
+
+#didomi-vendors-count .didomi-popup-view .didomi-popup-header {
+  background-color: #e2f5f9 !important;
+}
+
+#didomi-vendors-count .didomi-popup-view .didomi-popup-header .didomi-arrow-back-vendors-count {
+  color: #1f2937 !important;
+}
+
+#didomi-vendors-count .didomi-popup-view .didomi-popup-header .vendors-list-labels .iab-vendors-count-label,
+#didomi-vendors-count .didomi-popup-view .didomi-popup-header .vendors-list-labels .vendors-count-label {
+  background-color: #fff !important;
+}
+
+#didomi-host .didomi-consent-popup-vendor__description {
+  color: #33355a !important;
+}

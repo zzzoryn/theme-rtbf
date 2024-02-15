@@ -1,0 +1,308 @@
+@import url(rtbf-variables.css);
+
+.prose {
+    color: var(--rtbf-content-900);
+}
+
+.prose [class~="lead"] {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.prose a {
+    text-decoration: none;
+}
+
+.prose a:hover,
+.prose a:active,
+.prose a:focus {
+    text-decoration: underline;
+}
+
+.prose strong {
+    font-weight: 600;
+}
+
+.prose ol {
+    counter-reset: list-counter;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.prose ol>li {
+    position: relative;
+    counter-increment: list-counter;
+    padding-left: 1.75rem;
+}
+
+.prose ol>li::before {
+    content: counter(list-counter) ".";
+    position: absolute;
+    font-weight: 400;
+    color: var(--content-600);
+}
+
+.prose ul>li {
+    position: relative;
+    padding-left: 1.75rem;
+}
+
+.prose ul>li::before {
+    content: "";
+    position: absolute;
+    background-color: var(--rtbf-primary);
+    border-radius: 50%;
+    width: 0.375rem;
+    height: 0.375rem;
+    top: calc(0.875rem - 0.1875rem);
+    left: 0.25rem;
+}
+
+.prose hr {
+    border-color: var(--rtbf-blue-100);
+    border-top-width: 1px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+.prose blockquote {
+    font-weight: 500;
+    font-style: italic;
+    color: #1a202c;
+    border-left-width: 0.25rem;
+    border-left-color: var(--rtbf-blue-100);
+    quotes: "\201C" "\201D" "\2018" "\2019";
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
+    padding-left: 1rem;
+}
+
+.prose blockquote p:first-of-type::before {
+    content: open-quote;
+}
+
+.prose blockquote p:last-of-type::after {
+    content: close-quote;
+}
+
+.prose h1 {
+    font-weight: 800;
+    font-size: 2.25rem;
+    margin-top: 0;
+    margin-bottom: 0.9rem;
+    line-height: 1.1;
+}
+
+.prose h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3333333;
+}
+
+.prose h3 {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+}
+
+.prose h4 {
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.prose figure figcaption {
+    color: var(--rtbf-content-600);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    margin-top: 0.9rem;
+}
+
+.prose code {
+    color: var(--rtbf-content-900);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.prose code::before {
+    content: "`";
+}
+
+.prose code::after {
+    content: "`";
+}
+
+.prose pre {
+    color: var(--rtbf-content-300);
+    background-color: var(--rtbf-content-800);
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-top: 1.7rem;
+    margin-bottom: 1.7rem;
+    border-radius: 0.375rem;
+    padding-top: 0.9rem;
+    padding-right: 1.15rem;
+    padding-bottom: 0.9rem;
+    padding-left: 1.15rem;
+}
+
+.prose pre code {
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 0;
+    padding: 0;
+    font-weight: 400;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+}
+
+.prose pre code::before {
+    content: "";
+}
+
+.prose pre code::after {
+    content: "";
+}
+
+.prose table {
+    width: 100%;
+    table-layout: auto;
+    text-align: left;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+}
+
+.prose thead {
+    color: #1a202c;
+    font-weight: 600;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--rtbf-blue-100);
+}
+
+.prose thead th {
+    vertical-align: bottom;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.prose tbody tr {
+    border-bottom-width: 1px;
+    border-bottom-color: var(--rtbf-blue-100);
+}
+
+.prose tbody tr:last-child {
+    border-bottom-width: 0;
+}
+
+.prose tbody td {
+    vertical-align: top;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.prose {
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.prose p {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.prose img {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.prose video {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.prose figure {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.prose figure>* {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.prose h2 code {
+    font-size: 0.875rem;
+}
+
+.prose h3 code {
+    font-size: 0.9rem;
+}
+
+.prose ul {
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.prose li {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.prose ol>li:before {
+    left: 0;
+}
+
+.prose>ul>li p {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.prose>ul>li>*:first-child {
+    margin-top: 1.25rem;
+}
+
+.prose>ul>li>*:last-child {
+    margin-bottom: 1.25rem;
+}
+
+.prose>ol>li>*:first-child {
+    margin-top: 1.25rem;
+}
+
+.prose>ol>li>*:last-child {
+    margin-bottom: 1.25rem;
+}
+
+.prose ul ul,
+.prose ul ol,
+.prose ol ul,
+.prose ol ol {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.prose hr+* { margin-top: 0; }
+.prose h2+* { margin-top: 0; }
+.prose h3+* { margin-top: 0; }
+.prose h4+* { margin-top: 0; }
+.prose thead th:first-child { padding-left: 0; }
+.prose thead th:last-child { padding-right: 0; }
+.prose tbody td:first-child { padding-left: 0; }
+.prose tbody td:last-child { padding-right: 0; }
+.prose> :first-child { margin-top: 0; }
+.prose> :last-child { margin-bottom: 0; }
