@@ -906,3 +906,57 @@ $(function() {
     $('#request_custom_fields_' + fieldId).taggerSearchable();
   });
 });
+
+// P+ AZ
+// Suggested articles
+$(function() {
+  const formFields = [
+    17085950076305,
+    22144210690321,
+    18732575647121,
+    22144554800145,
+    19572717825681
+  ];
+
+  $('.suggestion-list').remove();
+
+  function suggestedTemplate(articles) {
+    return `
+      <div class="searchbox">
+        <h2>Articles suggérés</h2>
+        <div class="searchbox-suggestions">
+          <ul>
+            ${articles.map(a => `<li><a href="${a.html_url}">${a.title}</a></li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+  }
+
+  formFields.forEach(function(fieldID) {
+    const $container = $(`.request_custom_fields_${fieldID}`);
+    const $input = $(`#request_custom_fields_${fieldID}`);
+    const tagger = $input.data('tagger');
+
+    const $suggestedContainer = $('<div class="suggestion-list"></div>');
+    $container.append($suggestedContainer);
+
+    $input.on('change', function() {
+      const value = tagger.filter((item) => item.value === $input.val())[0].label;
+
+      if (value) {
+        $.get(`/api/v2/help_center/articles/search?query=${value}&per_page=6`, function(data) {
+          if (data.results) {
+            $suggestedContainer.html(suggestedTemplate(data.results));
+          }
+          else {
+            $suggestedContainer.html();
+          }
+        });
+      }
+      else {
+        $suggestedContainer.html();
+      }
+    });
+  });
+});
